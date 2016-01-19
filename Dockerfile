@@ -34,6 +34,7 @@ RUN apt-get install -y libgmp-dev
 RUN apt-get install -y libgmp3-dev
 RUN apt-get install -y libmysqlclient-dev
 
+# Set up pushbit git defaults
 RUN git config --global user.email "bot@pushbit.co"
 RUN git config --global user.name "Pushbit"
 RUN git config --global push.default simple
