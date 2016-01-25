@@ -1,7 +1,8 @@
-FROM ubuntu:14.04.3
+FROM ubuntu:15.10
 
 # Install dependent software 
 RUN apt-get update
+RUN apt-get upgrade -y
 RUN apt-get install -y curl
 RUN apt-get install -y git 
 RUN apt-get install -y wget 
@@ -38,3 +39,8 @@ RUN apt-get install -y libmysqlclient-dev
 RUN git config --global user.email "bot@pushbit.co"
 RUN git config --global user.name "Pushbit"
 RUN git config --global push.default simple
+
+ADD ./clone.sh ./clone.sh
+ADD ./execute.sh ./execute.sh
+ENTRYPOINT ["./clone.sh"]
+CMD ["./execute.sh"]
