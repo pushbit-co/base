@@ -41,6 +41,8 @@ RUN git config --global user.name "Pushbit"
 RUN git config --global push.default simple
 
 ADD ./clone.sh ./clone.sh
+ADD ./copy.sh ./copy.sh
 ADD ./execute.sh ./execute.sh
-ENTRYPOINT ["./clone.sh"]
+
+ENTRYPOINT ["./copy.sh"]
 CMD ["./execute.sh"]
