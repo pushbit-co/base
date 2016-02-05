@@ -3,6 +3,6 @@
 sleep 2
 
 echo "Copying code from volume"
-cp /pushbit/code /code
+cp -r /pushbit/code /code
 
 $1
