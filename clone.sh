@@ -1,11 +1,9 @@
 #!/bin/bash -e
 
-sleep 3
-
 echo "cloning git repo from:"
-echo https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git /pushbit/code
+echo ${CLONE_URL} /pushbit/code
 
-git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git /pushbit/code
+git clone ${CLONE_URL} /pushbit/code
 
 echo "entering git repo: /pushbit/code"
 cd /pushbit/code
