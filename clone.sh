@@ -1,16 +1,19 @@
 #!/bin/bash -e
 
+# sleep is required otherwise the first log lines here don't end up being recorded
 sleep 3
 
-echo "cloning git repo from:"
-echo https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git /pushbit/code
+echo "injecting ssh key"
+mkdir ~/.ssh
+echo ${PUSHBIT_SSH_KEY} > ~/.ssh/id_rsa
 
-git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO}.git /pushbit/code
+echo "cloning from ${PUSHBIT_REPOSITORY_URL}"
+git clone ${PUSHBIT_REPOSITORY_URL} /pushbit/code
 
 echo "entering git repo: /pushbit/code"
 cd /pushbit/code
 
-echo "checking out branch/commit: ${BASE_BRANCH}"
-git checkout ${BASE_BRANCH}
+echo "checking out base branch: ${PUSHBIT_BASE_BRANCH}"
+git checkout ${PUSHBIT_BASE_BRANCH}
 
 $1
