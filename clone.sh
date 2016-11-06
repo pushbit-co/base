@@ -3,9 +3,16 @@
 # sleep is required otherwise the first log lines here don't end up being recorded
 sleep 3
 
-echo "injecting ssh key"
 mkdir ~/.ssh
-echo ${PUSHBIT_SSH_KEY} > ~/.ssh/id_rsa
+
+echo "adding github.com to known hosts"
+ssh-keyscan -t dsa github.com >> ~/.ssh/known_hosts
+
+echo "injecting ssh key"
+echo -e "${PUSHBIT_BASE64_SSH_KEY}" | base64 -d > ~/.ssh/id_rsa
+
+echo "setting key permissions"
+chmod 700 ~/.ssh/id_rsa
 
 echo "cloning from ${PUSHBIT_REPOSITORY_URL}"
 git clone ${PUSHBIT_REPOSITORY_URL} /pushbit/code
